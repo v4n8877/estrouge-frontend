@@ -5,6 +5,21 @@
 .App {
   /*text-align: center;*/
   font-family: 'Rubik', Helvetica, Arial, sans-serif;
-  background-color: #f6f9fc;
+  background-color: #dedbe1;
   height: 100vh;
+}
+
+.content {
+  display: flex;
+  padding: 20px;
+  width: 100%;
+  margin-top: 56px;
+  background-color: #dedbe1;
+  overflow: hidden;
+  min-height: 900px;
+}
+
+.style-normal {
+  width: 100%;
+  max-width: 1280px;
 }

@@ -1,9 +1,18 @@
 const RouterPath = {
-  HOME: {
-    path: '/'
+  LIST_USER: {
+    path: '/list-user'
   },
-  SIGN_IN: {
+  LOGIN: {
     path: '/login'
+  },
+  REGISTRATION: {
+    path: '/register'
+  },
+  FORGOT_PASSWORD: {
+    path: '/login',
+  },
+  NOT_FOUND: {
+    path: '/not-found'
   },
 };
 

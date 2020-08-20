@@ -7,14 +7,10 @@ const Input = styled.input`
   width: 100%;
   background-color: #ffffff;
   text-indent: 5px;
-  height: 37px;
+  height: 3.5rem;
+  padding: 0.94rem 1.94rem;
   border-radius: 1px;
   border: solid 1px #dddddd;
-  /* height: 45px;
-  border-radius: 5px;
-  border: solid 1px #dbe5f0;
-  background-color: #ffffff; */
-  padding: 0 8px;
   outline: none;
   box-sizing: border-box;
   ${props => props.disabled && css`

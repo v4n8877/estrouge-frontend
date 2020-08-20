@@ -11,18 +11,11 @@ const composeEnhancers =
     }) : compose;
 
 
-const confStore = (initialState = {}) => {
-  const store = createStore(
-    initialState,
-    composeEnhancers(
-      applyMiddleware(thunkMiddleware)
-    ),
-  )
-  return { store }
-}
-
-const { store } = confStore();
-
-global.store = store;
-
-export { store };
+    export default () => {
+      return createStore(
+        rootReducer,
+        composeEnhancers(
+          applyMiddleware(thunkMiddleware)
+        ),
+      )
+    }
