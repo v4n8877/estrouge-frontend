@@ -1,0 +1,10 @@
+*{
+  box-sizing: border-box;
+  font-family: 'Rubik',Helvetica,Arial,sans-serif;
+}
+.App {
+  /*text-align: center;*/
+  font-family: 'Rubik', Helvetica, Arial, sans-serif;
+  background-color: #f6f9fc;
+  height: 100vh;
+}
