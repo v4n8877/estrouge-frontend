@@ -9,7 +9,7 @@ const Input = styled.input`
   text-indent: 5px;
   height: 3.5rem;
   padding: 0.94rem 1.94rem;
-  border-radius: 1px;
+  border-radius: 0;
   border: solid 1px #dddddd;
   outline: none;
   box-sizing: border-box;

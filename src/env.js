@@ -1,10 +1,10 @@
 const ENV = {
 	LCL: {
-		REACT_APP_API_SERVER: 'http://swagger-demo.s3-website-ap-southeast-1.amazonaws.com',
+		REACT_APP_API_SERVER: 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com',
 	},
 
 	DEV: {
-    REACT_APP_API_SERVER: 'http://swagger-demo.s3-website-ap-southeast-1.amazonaws.com',
+    REACT_APP_API_SERVER: 'https://cyb06ylby6.execute-api.ap-southeast-1.amazonaws.com',
 	},
 
 	STG: {

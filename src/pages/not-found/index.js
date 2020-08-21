@@ -12,14 +12,15 @@ import RouterPath from '../../constants/route-path';
 
 const NotFound = (props) => {
   const Token = Storage.get("USER_ACCESS_TOKEN");
+
   const OnLink = () => {
     if(Token) {
-      props.history.push(`${RouterPath.LISTUSER.path}`);
+      props.history.push(`${RouterPath.LIST_USER.path}`);
     } else {
       props.history.push(`${RouterPath.LOGIN.path}`);
     }
-
   };
+  
   return (
     <ErrorPage>
       <FormContent>

@@ -8,6 +8,8 @@ import RouterPath from '../constants/route-path';
 //Import components
 const NotFound = lazy(() => import('../pages/not-found'));
 const SignIn = lazy(() => import('../pages/auth/sign-in'));
+const SignUp = lazy(() => import('../pages/auth/sign-up'));
+const LisUser = lazy(()=> import('../pages/list-user/list-user'))
 
 const PrivateRoute = ({ condition, redirect, ...props }) => {
   condition = condition()
@@ -18,20 +20,23 @@ const PrivateRoute = ({ condition, redirect, ...props }) => {
 
 class Routes extends Component {
 
-  _authCondition = () => Storage.has('ACCESS_TOKEN')
+  _authCondition = () => Storage.has('USER_ACCESS_TOKEN');
 
-  _notAuthCondition = () => !Storage.has('ACCESS_TOKEN')
+  _notAuthCondition = () => !Storage.has('USER_ACCESS_TOKEN');
 
   _renderLazyComponent = (LazyComponent, params) => props => <LazyComponent {...props} {...params} />
 
-  _renderAuthRoutes = () => (
-    <Suspense fallback={<Page><Loading /></Page>}>
-      <Switch>
-        <Route exact path={RouterPath.LIST_USER.path} component={this._renderLazyComponent(SignIn)} />
-        <Redirect to={RouterPath.NOT_FOUND.path} />
-      </Switch>
-    </Suspense>
-  )
+  _renderAuthRoutes = () => {
+    return (
+      <Suspense fallback={<Page><Loading /></Page>}>
+        <Switch>
+          <Route exact path={RouterPath.LIST_USER.path} component={this._renderLazyComponent(LisUser)} />
+          <Redirect to={RouterPath.NOT_FOUND.path} />
+        </Switch>
+      </Suspense>
+    );
+  }
+    
 
   render() {
     return (
@@ -45,8 +50,28 @@ class Routes extends Component {
               condition={this._notAuthCondition}
               redirect={RouterPath.LIST_USER.path}
             />
+
+            <PrivateRoute
+              exact
+              path={RouterPath.REGISTRATION.path}
+              component={this._renderLazyComponent(SignUp)}
+              condition={this._notAuthCondition}
+              redirect={RouterPath.LIST_USER.path}
+            />
+
+            <PrivateRoute
+              exact
+              path={RouterPath.LIST_USER.path}
+              component={this._renderLazyComponent(LisUser)}
+              condition={this._authCondition}
+              redirect={RouterPath.LOGIN.path}
+            />
             
-            <Route path={RouterPath.NOT_FOUND.path} component={this._renderLazyComponent(NotFound)} />
+            <Route
+              path='*'
+              exact
+              component={this._renderLazyComponent(NotFound)} 
+            />
           </Switch>
         </Suspense>
       </BrowserRouter>

@@ -30,7 +30,7 @@ export const TextNotFound = styled.label`
 
 export const BtnNotFound = styled(Button)`
   width: 200px;
-  height: 50px;
   margin-top: 20px;
   font-size: 15px;
+  color: #2d5f96;
 `;

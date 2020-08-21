@@ -12,6 +12,7 @@ export const AuthWrapper = styled.div`
   font-family: 'Rubik', Helvetica, Arial, sans-serif;
   width: 100%;
   height: 100vh;
+  margin: 3rem 0;
 `;
 
 export const WrapperForm =styled.form`

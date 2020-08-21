@@ -11,7 +11,6 @@ import {
 } from "../../../ultis/validations.js";
 import RouterPath from '../../../constants/route-path';
 
-
 //import component
 import AuthForm from '../components/auth';
 import {
@@ -20,7 +19,8 @@ import {
   Checked,
   ButtonFB
  } from '../components/style';
-
+//Import actions
+import { ACTIONS } from '../../../store/actions/auth';
 
 class SignIn extends Component {
   constructor (props) {
@@ -32,13 +32,21 @@ class SignIn extends Component {
       errors: {
         username: false,
         password: false,
-        keepSignIn: false,
       }
     }
   }
 
   componentDidUpdate(prevProps ) {
-    
+    const { status, error, token } = this.props;
+    if (prevProps.status !== status) {
+      switch (status) {
+        case ACTIONS.LOGIN_SUCCESS:
+            this.props.history.push(`${RouterPath.LIST_USER.path}`);
+          break;
+        default:
+          break;
+      }
+    }
   }
 
   handleValue = (event) => {
@@ -46,7 +54,7 @@ class SignIn extends Component {
     const { errors } = this.state;
 
     //validation email
-    if (name === "email") {
+    if (name === "username") {
       if (value === '') {
         this.setState({
           [name]: value,
@@ -74,33 +82,28 @@ class SignIn extends Component {
         });
       }
     }
+    
+    if(name === "keepSignIn") {
+      this.setState({
+        [name]: value,
+      });
+    }
   };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { email, password } =this.state;
-    this.props.loginSecurity({
-      auth_key: email,
-      password: password,
-    });
-  };
-
-  handleRouter = (event) => {
-    event.preventDefault();
-    this.props.history.push(`${RouterPath.SIGN_UP.path}`);
-  };
-
-  handleLogin = () => {
-    const { email, password } =this.state;
+    const { username, password } =this.state;
     this.props.login({
-      email: email,
+      username: username,
       password: password,
     });
   };
 
 
   render() {
-    const { password, errors, username} =this.state;
+    const { password, errors, username, keepSignIn} =this.state;
+    const { status } = this.props
+    const disableBtn = status === ACTIONS.LOGIN_PROGRESS;
 
     return (
       <AuthForm end='true'>
@@ -159,6 +162,7 @@ class SignIn extends Component {
 
         <div className="btn-login">
           <ButtonLogin
+            disabled={disableBtn}
             onClick={(e) =>this.handleSubmit(e)}
           >
             sign in
@@ -168,8 +172,8 @@ class SignIn extends Component {
           <Checked
             name="keepSignIn"
             label='Keep me signed in'
-            value={errors.keepSignIn}
-            onChange={(e) => this._handleValue(e)}
+            value={keepSignIn}
+            onChange={(e) => this.handleValue(e)}
           />
           <Link to={RouterPath.FORGOT_PASSWORD.path}>
             Forgot password
@@ -177,7 +181,7 @@ class SignIn extends Component {
         </div>
         <div className="btn-login">
           <ButtonFB
-            onClick={(e) =>this.handleSubmit(e)}
+            onClick={() =>{}}
           >
             <FontAwesomeIcon icon={faFacebookF} />
             Connect using facebook
