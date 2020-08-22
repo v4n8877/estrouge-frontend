@@ -8,19 +8,28 @@
   background-color: #dedbe1;
   height: 100vh;
   overflow: auto;
+  font-size: 1rem;
 }
 
-.content {
-  display: flex;
-  padding: 20px;
-  width: 100%;
-  margin-top: 56px;
-  background-color: #dedbe1;
-  overflow: hidden;
-  min-height: 900px;
-}
-
-.style-normal {
+.container {
   width: 100%;
   max-width: 1280px;
+}
+
+.pages {
+  display: flex;
+  margin: 2rem auto;
+  min-height: calc(100vh - 70px);
+}
+
+.pages__menu {
+  flex: 1;
+  padding-left: 1rem;
+}
+
+.pages__content {
+  flex: 3;
+  transition: width 0.25s ease, margin 0.25s ease;
+  width: calc(100% - 237px);
+  padding: 0 1rem
 }

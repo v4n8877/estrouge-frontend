@@ -1,41 +1,31 @@
-import {ACTIONS} from '../actions/auth';
-import Storage from '../../ultis/storage';
+import { ACTIONS } from '../actions/listUsers';
 
 const initialState = {
   status: null,
   error: null,
-  token: null,
+  listUsers: [],
 };
 
 export default (state = initialState, action) => {
   switch (action.type) {
     // ACTIONS WITHOUT DATA WILL BE PLACES HERE
-    case ACTIONS.LOGIN_PROGRESS:
+    case ACTIONS.GET_LIST_USER_PROGRESS:
       return {
         ...state,
         status: action.type,
       };
 
     // ACTIONS WITH DATA WILL BE PLACES HERE
-    case ACTIONS.LOGIN_SUCCESS:
-      Storage.set("USER_ACCESS_TOKEN", action.data.user.token);
+    case ACTIONS.GET_LIST_USER_SUCCESS:
      
       return {
         ...state,
         status: action.type,
-        token: action.data.user.token,
-      };
-
-      case ACTIONS.LOGOUT:
-      Storage.remove('USER_ACCESS_TOKEN');
-      return {
-          ...state,
-          status: action.type,
-          token: null
+        listUsers: action.data.listUsers,
       };
 
     // ACTION FAILED WILL BE PLACED HERE
-    case ACTIONS.LOGIN_FAILED:
+    case ACTIONS.GET_LIST_USER_FAILED:
       return {
         ...state,
         status: action.type,

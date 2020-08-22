@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from "react-router-dom";
 //Import actions
-import { login   } from '../../../store/actions/auth';
+import { login } from '../../../store/actions/auth';
 import SignIn from './sign-in';
 
 

@@ -6,10 +6,12 @@ import Page from '../components/page';
 import Storage from '../ultis/storage';
 import RouterPath from '../constants/route-path';
 //Import components
+import Header from '../components/header';
+import SideBar from '../components/sidebar';
 const NotFound = lazy(() => import('../pages/not-found'));
 const SignIn = lazy(() => import('../pages/auth/sign-in'));
 const SignUp = lazy(() => import('../pages/auth/sign-up'));
-const LisUser = lazy(()=> import('../pages/list-user/list-user'))
+const LisUser = lazy(()=> import('../pages/list-user'));
 
 const PrivateRoute = ({ condition, redirect, ...props }) => {
   condition = condition()
@@ -28,12 +30,23 @@ class Routes extends Component {
 
   _renderAuthRoutes = () => {
     return (
-      <Suspense fallback={<Page><Loading /></Page>}>
-        <Switch>
-          <Route exact path={RouterPath.LIST_USER.path} component={this._renderLazyComponent(LisUser)} />
-          <Redirect to={RouterPath.NOT_FOUND.path} />
-        </Switch>
-      </Suspense>
+      <>
+        <Header />
+        <div className="container pages">
+          <div className="pages__menu">
+            <SideBar />
+          </div>
+          <div className="pages__content">
+            <Suspense fallback={<Page><Loading /></Page>}>
+              <Switch>
+                <Route exact path={RouterPath.LIST_USER.path} component={this._renderLazyComponent(LisUser)} />
+                <Redirect to={RouterPath.NOT_FOUND.path} />
+              </Switch>
+            </Suspense>
+          </div>
+        </div>
+        
+      </>
     );
   }
     
@@ -62,7 +75,7 @@ class Routes extends Component {
             <PrivateRoute
               exact
               path={RouterPath.LIST_USER.path}
-              component={this._renderLazyComponent(LisUser)}
+              component={this._renderAuthRoutes}
               condition={this._authCondition}
               redirect={RouterPath.LOGIN.path}
             />

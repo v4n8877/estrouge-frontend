@@ -1,11 +1,17 @@
 import React, { Component }from 'react';
+import TableUser from './tablesUser';
 
 class ListUser extends Component {
 
+  componentDidMount() {
+    this.props.getListUsers();
+  }
+
   render() {
+    const { listUsers } = this.props;
     return(
     <>
-      <h1>List User</h1>
+      <TableUser dataUsers={listUsers}/>
     </>
     )
   }

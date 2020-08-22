@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {  faFacebookF , } from '@fortawesome/free-brands-svg-icons';
+import { faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 import InputCustom from 'components/input';
 import LabelCustom from 'components/label';
@@ -37,7 +37,7 @@ class SignIn extends Component {
   }
 
   componentDidUpdate(prevProps ) {
-    const { status, error, token } = this.props;
+    const { status } = this.props;
     if (prevProps.status !== status) {
       switch (status) {
         case ACTIONS.LOGIN_SUCCESS:
@@ -104,7 +104,7 @@ class SignIn extends Component {
     const { password, errors, username, keepSignIn} =this.state;
     const { status } = this.props
     const disableBtn = status === ACTIONS.LOGIN_PROGRESS;
-
+    
     return (
       <AuthForm end='true'>
         <div className="form-container">

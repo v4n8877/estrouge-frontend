@@ -23,8 +23,7 @@ const callApi =  (
     })
     .then((data) => {
       if (data && !config.isFileDownload) {
-        data.meta.status === 200 && onRequestSuccess && onRequestSuccess(data);
-        data.meta.status !== 200 && onRequestFailure && onRequestFailure(data.meta);
+        data && onRequestSuccess && onRequestSuccess(data);
       }
     })
     .catch((err) => {
